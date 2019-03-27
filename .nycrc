@@ -1,13 +1,10 @@
 {
   "include": [
-    "src/**/*.js"
+    "src/**/*.ts"
   ],
   "exclude": [
-    "**/index.ts",
-    "**/index.js",
-    "**/interfaces/*.js",
-    "**/*.spec.js",
-    "src/test/tools.js"
+    "**/interfaces/*.ts",
+    "**/*.spec.ts"
   ],
   "reporter": [
     "lcov",
@@ -20,6 +17,6 @@
   "lines": 99,
   "statements": 100,
   "functions": 99,
-  "branches": 89,
+  "branches": 99,
   "all": true
 }
