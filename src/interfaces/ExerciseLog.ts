@@ -1,4 +1,4 @@
-export interface IExerciseLog {
+export interface ExerciseLog {
     id: number;
     name: string;
 }
