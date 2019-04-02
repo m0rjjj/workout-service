@@ -11,7 +11,7 @@ export class ExerciseLogService implements AfterRoutesInit {
 
 	public $afterRoutesInit() {
 		const connection = this.typeORMService.get();
-    if (connection) {
+		if (connection) {
 			this.connection = connection;
 		}
 	}

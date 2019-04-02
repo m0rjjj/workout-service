@@ -18,7 +18,7 @@
     "watch": "run-p start:dev test:unit:watch"
   },
   "pre-commit": [
-    "test:lint:fix"
+    "test:lint"
   ],
   "author": "",
   "license": "ISC",
