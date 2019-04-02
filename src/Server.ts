@@ -1,52 +1,56 @@
-import {ServerLoader, ServerSettings, GlobalAcceptMimesMiddleware} from '@tsed/common';
-import cookieParser from 'cookie-parser';
+import { GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings } from '@tsed/common';
 import bodyParser from 'body-parser';
 import compress from 'compression';
+import cookieParser from 'cookie-parser';
+import { $log } from 'ts-log-debug';
 const rootDir = __dirname;
 
 @ServerSettings({
-	rootDir,
 	acceptMimes: ['application/json'],
-	port: 3001,
 	httpsPort: 9443,
 	mount: {
-		'/api': '${rootDir}/controllers/**/*.ts'
+		'/api': `${rootDir}/controllers/**/*.ts`
 	},
-	swagger: [{
-		path: '/api/docs'
-	}],
-	typeorm: [{
-		name: 'default',
-		type: 'postgres',
-		host: 'localhost',
-		port: 5432,
-		username: 'root',
-		password: '0000',
-		database: 'workout',
-		synchronize: true,
-		logging: false,
-		entities: [
-			`${rootDir}/entities/*{.ts,.js}`
-		]
-	}],
+	port: 3001,
+	rootDir,
+	swagger: [
+		{
+			path: '/api/docs'
+		}
+	],
+	typeorm: [
+		{
+			database: 'workout',
+			entities: [`${rootDir}/entities/*{.ts,.js}`],
+			host: 'localhost',
+			logging: false,
+			name: 'default',
+			password: '0000',
+			port: 5432,
+			synchronize: true,
+			type: 'postgres',
+			username: 'root'
+		}
+	]
 })
 export class Server extends ServerLoader {
-	public $onMountingMiddlewares(): void|Promise<any> {
-			this
-				.use(GlobalAcceptMimesMiddleware)
-				.use(cookieParser())
-				.use(compress({}))
-				.use(bodyParser.json())
-				.use(bodyParser.urlencoded({
+	public $onMountingMiddlewares(): void | Promise<any> {
+		this.use(GlobalAcceptMimesMiddleware)
+			.use(cookieParser())
+			.use(compress({}))
+			.use(bodyParser.json())
+			.use(
+				bodyParser.urlencoded({
 					extended: true
-				}));
+				})
+			);
 	}
 
 	public $onReady() {
-			console.log('Server started...');
+		$log.debug('Server started...');
 	}
 
 	public $onServerInitError(err: any) {
-			console.error(err);
+		$log.error(err);
 	}
 }

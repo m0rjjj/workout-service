@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { ExerciseLogCtrl } from './ExerciseLogCtrl';
-import { ExerciseLogService } from '~/services/ExerciseLogService';
 import { TypeORMService } from '@tsed/typeorm';
+import { expect } from 'chai';
+import { ExerciseLogService } from '~/services/ExerciseLogService';
+import { ExerciseLogCtrl } from './ExerciseLogCtrl';
 
 describe('ExerciseLogCtrl', () => {
 	let ctrl;
